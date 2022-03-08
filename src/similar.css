@@ -1,0 +1,72 @@
+.MaterialForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.MaterialForm > Form {
+  display: flex;
+  flex-direction: column;
+  padding: 32px;
+  min-width: 350px;
+  border-radius: 8px;
+  margin: 32px;
+}
+
+.registrationContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.registrationCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 700px;
+  height: 500px;
+  margin-top: 150px;
+}
+
+.errorMsg {
+  color: red;
+}
+
+.content {
+  min-height: 300px;
+  margin-top: 90px;
+}
+
+.Card-Header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1%;
+  min-width: 100px;
+}
+
+.card-content-cust {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 2%;
+}
+
+.TableMaterial {
+  width: 350px;
+}
+
+@media only screen and (min-width: 900px) {
+  .TableMaterial {
+    width: 90vmax !important;
+  }
+}
+
+@media only screen and (min-width: 760px) {
+  .TableMaterial {
+    width: 700px;
+  }
+}
