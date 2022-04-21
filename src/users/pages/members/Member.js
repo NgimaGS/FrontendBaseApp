@@ -15,7 +15,7 @@ const Member = () => {
   };
   return (
     <>
-      <div>
+      <div className="card-cont-head">
         <CardContentHeader
           title="Members"
           type="add"
@@ -25,9 +25,7 @@ const Member = () => {
       </div>
 
       <div className="card-content-cust">
-        <div style={{ maxWidth: "100%" }}>
-          <MemberTable />
-        </div>
+        <MemberTable />
       </div>
     </>
   );

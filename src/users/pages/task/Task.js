@@ -15,16 +15,14 @@ const Task = () => {
   };
   return (
     <>
-      <div>
+      <div className="card-cont-head" style={{ marginLeft: "2%" }}>
         <CardContentHeader title="Task" type="add" onClick={() => handleOpen()}>
           <AddTaskForm open={open} handleClose={() => handleClose()} />
         </CardContentHeader>
       </div>
 
-      <div className="card-content-cust">
-        <div style={{ maxWidth: "100%" }}>
-          <TaskTable />
-        </div>
+      <div className="card-content-cust" style={{ marginLeft: "1%" }}>
+        <TaskTable />
       </div>
     </>
   );

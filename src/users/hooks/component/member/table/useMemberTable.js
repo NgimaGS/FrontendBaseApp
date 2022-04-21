@@ -1,4 +1,5 @@
 import { useGetMembersByProjectId } from "../../../api/member/useMember";
+import moment from "moment";
 
 const useMemberTable = () => {
   const { data } = useGetMembersByProjectId();
@@ -12,7 +13,11 @@ const useMemberTable = () => {
       field: "User",
       render: (rowData) => rowData?.User?.phoneNumber,
     },
-    { title: "Joined Date", field: "createdAt" },
+    {
+      title: "Joined Date",
+      field: "createdAt",
+      render: (rowData) => moment(rowData?.createdAt).format("DD-MM-YYYY"),
+    },
   ];
   return { data, columns };
 };

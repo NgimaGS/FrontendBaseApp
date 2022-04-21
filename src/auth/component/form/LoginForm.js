@@ -44,9 +44,12 @@ const LoginForm = () => {
             Log In
           </Button>
           <Box height={8} />
-          <Button component={Link} to="/register">
-            Sign Up
-          </Button>
+          <p>
+            Don't have an account?
+            <Button component={Link} to="/register">
+              Sign Up
+            </Button>
+          </p>
         </Form>
       </Formik>
     </div>

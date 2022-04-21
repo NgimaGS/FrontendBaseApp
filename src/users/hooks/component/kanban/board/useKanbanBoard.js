@@ -1,6 +1,7 @@
 import { useUpdateProjectTask } from "../../../api/kanban/useKanban";
 import { moveCard } from "@asseinfo/react-kanban";
 import { useState } from "react";
+import moment from "moment";
 
 const useKanbanBoard = (card) => {
   const openCards = [];
@@ -19,6 +20,9 @@ const useKanbanBoard = (card) => {
           id: key.id,
           title: key.name,
           description: key.description,
+          type: key.type,
+          createdAt: moment(key.createdAt).format("ll"),
+          assignedTo: key.assignedTo,
         });
     });
 
@@ -30,6 +34,9 @@ const useKanbanBoard = (card) => {
           id: key.id,
           title: key.name,
           description: key.description,
+          type: key.type,
+          createdAt: moment(key.createdAt).format("ll"),
+          assignedTo: key.assignedTo,
         });
     });
 
@@ -41,6 +48,9 @@ const useKanbanBoard = (card) => {
           id: key.id,
           title: key.name,
           description: key.description,
+          type: key.type,
+          createdAt: moment(key.createdAt).format("ll"),
+          assignedTo: key.assignedTo,
         });
     });
 

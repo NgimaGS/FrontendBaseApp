@@ -27,10 +27,11 @@ export const useGetMemberById = (id) => {
 };
 
 export const useAddMember = ({ onSuccess }) => {
+  const { project } = useSelector((state) => state.project);
   const queryClient = useQueryClient();
   return useMutation(["member"], (values) => addMember(values), {
     onSuccess: (data, variables, context) => {
-      queryClient.invalidateQueries(["getMember"]);
+      queryClient.invalidateQueries(["getMember", project?.id]);
       toast.success("Succesfully added member");
       onSuccess && onSuccess(data, variables, context);
     },

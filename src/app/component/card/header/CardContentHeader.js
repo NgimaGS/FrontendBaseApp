@@ -7,12 +7,13 @@ const CardContentHeader = ({ title, type, onClick, children }) => {
   return (
     <>
       <div className="Card-Header">
-        {title && <Typography variant="h4">{title}</Typography>}
+        {title && <Typography variant="h3">{title}</Typography>}
         {type && (
           <Fab
             color="primary"
             onClick={() => onClick()}
             size="medium"
+            sx={{ background: "#45A29e" }}
             aria-label="add">
             {type === "add" ? (
               <>

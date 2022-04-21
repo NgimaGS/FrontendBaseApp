@@ -3,7 +3,6 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
@@ -13,9 +12,12 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { useHistory, useLocation } from "react-router-dom";
 import Cookies from "js-cookie";
+import logo from "./../../assets/logo.png";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
-  let pages = ["Projects", "Task", "Members"];
+  let pages = ["Dashboard", "Task", "Members"];
+  const { project } = useSelector((state) => state.project);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const location = useLocation();
   const history = useHistory();
@@ -35,6 +37,8 @@ const Navbar = () => {
     const navPage = e.currentTarget.value.toLowerCase();
     if (navPage === "projects") {
       history.push(`/${navPage}`);
+    } else if (navPage === "dashboard") {
+      history.push(`/project-${project?.id}`);
     } else {
       history.push(`/project/${navPage}`);
     }
@@ -46,17 +50,27 @@ const Navbar = () => {
   };
 
   return (
-    <AppBar position="fixed">
-      <Container maxWidth="xl">
+    <AppBar sx={{ background: "#0B0c10" }}>
+      <Container maxWidth="xl" sx={{ m: 0 }}>
         <Toolbar disableGutters>
-          <Typography
-            variant="h6"
-            noWrap
+          <Container
+            nowrap
             component="div"
-            sx={{ mr: 2, display: { xs: "none", md: "flex" } }}>
-            LOGO
-          </Typography>
-
+            sx={{
+              width: "200px",
+              display: { xs: "none", md: "flex" },
+            }}>
+            <img
+              alt="logo"
+              src={logo}
+              onClick={() => history.push("/projects")}
+              style={{
+                width: "170px",
+                objectFit: "scale-down",
+                cursor: "pointer",
+              }}
+            />
+          </Container>
           <Box
             sx={{
               flexGrow: 1,
@@ -101,27 +115,39 @@ const Navbar = () => {
               ))}
             </Menu>
           </Box>
-          <Typography
-            variant="h6"
-            noWrap
+          <Container
             component="div"
-            sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-            LOGO
-          </Typography>
+            noWrap
+            sx={{
+              flexGrow: 3,
+              width: "70px",
+              p: 0,
+              display: { xs: "flex", md: "none" },
+            }}>
+            <img
+              alt="logo"
+              src={logo}
+              onClick={() => history.push("/projects")}
+              style={{
+                width: "100px",
+                objectFit: "scale-down",
+                cursor: "pointer",
+              }}
+            />
+          </Container>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <Button
                 key={page}
                 value={page}
                 onClick={(e) => handleNavClick(e)}
-                sx={{ my: 2, color: "white", display: "block" }}>
+                sx={{ color: "white", display: "block" }}>
                 {page}
               </Button>
             ))}
           </Box>
-
           <Box sx={{ flexGrow: 0 }}>
-            <Button color="inherit" onClick={handleLogOut} sx={{ mr: 7 }}>
+            <Button color="inherit" onClick={handleLogOut}>
               Log Out
             </Button>
             <Tooltip title="Open settings">

@@ -1,4 +1,7 @@
 import { Route, Switch } from "react-router-dom";
+import Component from "../../users/pages/component/Component";
+import ComponentDetail from "../../users/pages/component/detail/ComponentDetail";
+import Issue from "../../users/pages/issue/Issue";
 import Kanban from "../../users/pages/kanban/Kanban";
 import Member from "../../users/pages/members/Member";
 import Project from "../../users/pages/Project/Project";
@@ -13,8 +16,15 @@ const ProjectRoutes = () => {
         <Route path="/project/members" exact component={Member} />
         <Route path="/project/task" exact component={Task} />
         <Route path="/project/kanban" exact component={Kanban} />
+        <Route path="/project/issues" exact component={Issue} />
+        <Route path="/project/components" exact component={Component} />
 
         <Route path="/project-:id" exact component={Project} />
+        <Route
+          path="/project/components-:id"
+          exact
+          component={ComponentDetail}
+        />
       </Switch>
     </>
   );

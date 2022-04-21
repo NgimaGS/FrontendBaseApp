@@ -13,7 +13,9 @@ const Kanban = () => {
       <div>
         <CardContentHeader title="Kanban" />
       </div>
-      <KanbanBoard card={data} />
+      <div>
+        <KanbanBoard card={data} />
+      </div>
     </div>
   );
 };

@@ -3,6 +3,7 @@ import CardContentHeader from "../../../app/component/card/header/CardContentHea
 import ProjectCards from "../../components/projects/card/ProjectCards";
 import AddProjectForm from "../../../users/components/projects/form/AddProjectForm";
 import { useGetUserProjects } from "../../hooks/api/projects/useProjects";
+import { Grid } from "@mui/material";
 
 const Projects = () => {
   const [open, setOpen] = useState(false);
@@ -28,10 +29,18 @@ const Projects = () => {
       </div>
 
       <div className="card-content-cust">
-        {data &&
-          data.map((arrayData) => {
-            return <ProjectCards data={arrayData} />;
-          })}
+        <Grid container>
+          {data &&
+            data.project &&
+            data.project.map((arrayData) => {
+              return <ProjectCards data={arrayData} />;
+            })}
+          {data &&
+            data.member &&
+            data.member.map((arrayData) => {
+              return <ProjectCards data={arrayData?.Project} />;
+            })}
+        </Grid>
       </div>
     </>
   );

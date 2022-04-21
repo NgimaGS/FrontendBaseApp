@@ -1,6 +1,9 @@
+import { Grid } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import { Box } from "@mui/system";
 import React from "react";
 import SideDrawer from "../component/drawer/SideDrawer";
+import BottomNavbar from "../component/navbar/BottomNavbar";
 import Navbar from "../component/navbar/Navbar";
 
 const useStyles = makeStyles({
@@ -16,15 +19,16 @@ const AppLayout = ({ children }) => {
     <main>
       <>
         <div className={classes.container}>
-          <div className="side-nav">
-            <SideDrawer />
-          </div>
-          <div className="content-section">
-            <div>
-              <Navbar />
-              <div className="content">{children}</div>
-            </div>
-          </div>
+          <SideDrawer />
+          <Navbar />
+          <Grid container justifyContent="center">
+            <Grid item sm={12} md={10} xs={12}>
+              <Box component="main" sx={{ flexGrow: 1, p: 3, mt: 7 }}>
+                {children}
+              </Box>
+            </Grid>
+          </Grid>
+          <BottomNavbar />
         </div>
       </>
     </main>

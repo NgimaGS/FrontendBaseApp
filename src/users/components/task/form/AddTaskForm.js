@@ -4,15 +4,19 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
+  MenuItem,
+  Select,
   TextField,
 } from "@mui/material";
 import { Box } from "@mui/system";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import React from "react";
+import { useGetMembersByProjectId } from "../../../hooks/api/member/useMember";
 import { useTaskForm } from "../../../hooks/component/task/form/useTaskForm";
 
 const AddTaskForm = ({ open, handleClose }) => {
   const { initialValues, validationSchema, handleAddTask } = useTaskForm();
+  const { data: member } = useGetMembersByProjectId({});
   return (
     <>
       <Dialog open={open} onClose={() => handleClose()}>
@@ -63,14 +67,22 @@ const AddTaskForm = ({ open, handleClose }) => {
               />
               <Box height={8} />
               <Field
+                as={Select}
                 name="assignedTo"
-                type="status"
-                as={TextField}
+                type="assignedTo"
                 variant="outlined"
                 color="primary"
-                label="assignedTo"
-                fullWidth
-              />
+                label="Assigned To"
+                fullWidth>
+                {member &&
+                  member.map((memdata) => {
+                    return (
+                      <MenuItem value={memdata?.User?.username}>
+                        {memdata?.User?.name}
+                      </MenuItem>
+                    );
+                  })}
+              </Field>
               <Box height={8} />
             </DialogContent>
             <DialogActions>

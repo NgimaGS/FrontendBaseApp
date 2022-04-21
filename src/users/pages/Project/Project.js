@@ -4,6 +4,7 @@ import { useRouteMatch } from "react-router-dom";
 import CardContentHeader from "../../../app/component/card/header/CardContentHeader";
 import { useGetProjectById } from "../../hooks/api/projects/useProjects";
 import { setProject } from "../../../app/slice/projectSlice";
+import Dashboard from "../../components/dashboard/Dashboard";
 
 const Project = () => {
   const { params: { id } = {} } = useRouteMatch();
@@ -14,11 +15,11 @@ const Project = () => {
   return (
     <>
       <div>
-        <CardContentHeader title="Project"></CardContentHeader>
+        <CardContentHeader title="Project">
+          <h4> {`ID : ${data?.id}`}</h4>
+        </CardContentHeader>
       </div>
-      <div>
-        <h4> {`ID : ${data?.id}`}</h4>
-      </div>
+      <Dashboard id={id} />
     </>
   );
 };

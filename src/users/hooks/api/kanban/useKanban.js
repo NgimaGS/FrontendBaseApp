@@ -15,7 +15,7 @@ export const useGetTaskByProjectId = () => {
 export const useUpdateProjectTask = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(
-    ["updateBatchOperationalCost"],
+    ["updateProjectTask"],
     (values) => updateProjectTask(values),
     {
       onSuccess: (data, variables, context) => {

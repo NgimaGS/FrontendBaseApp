@@ -1,4 +1,4 @@
-import MaterialTable from "material-table";
+import MaterialTable from "@material-table/core";
 import React, { createRef } from "react";
 import { tableIcons } from "../../../../app/component/table/tableIcons";
 import useMemberTable from "../../../hooks/component/member/table/useMemberTable";

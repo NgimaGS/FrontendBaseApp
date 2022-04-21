@@ -14,3 +14,8 @@ export const addTask = async (values) => {
   const { data } = await axiosInstance.post(`/task`, values);
   return data;
 };
+
+export const updateTask = async (values) => {
+  const { data } = await axiosInstance.put(`/task`, values);
+  return data;
+};

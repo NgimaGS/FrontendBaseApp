@@ -11,7 +11,6 @@ import MuiDrawer from "@mui/material/Drawer";
 import { styled } from "@mui/material/styles";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import MapIcon from "@mui/icons-material/Map";
 import MediationIcon from "@mui/icons-material/Mediation";
 import SettingsIcon from "@mui/icons-material/Settings";
 import PriorityHighIcon from "@mui/icons-material/PriorityHigh";
@@ -21,11 +20,13 @@ import { useHistory, useLocation } from "react-router-dom";
 
 const drawerWidth = 240;
 
-const marginHeight = 70;
+const marginHeight = 65;
 
 const openedMixin = (theme) => ({
   width: drawerWidth,
   marginTop: marginHeight,
+  margin: 0,
+  padding: 0,
   transition: theme.transitions.create("width", {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.enteringScreen,
@@ -38,11 +39,13 @@ const closedMixin = (theme) => ({
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
+  margin: 0,
+  padding: 0,
   marginTop: marginHeight,
   overflowX: "hidden",
-  width: `calc(${theme.spacing(6)} + 1px)`,
+  width: `calc(${theme.spacing(0)} + 1px)`,
   [theme.breakpoints.up("sm")]: {
-    width: `calc(${theme.spacing(7)} + 1px)`,
+    width: `calc(${theme.spacing(9)} + 1px)`,
   },
 });
 
@@ -50,7 +53,10 @@ const Drawer = styled(MuiDrawer, {
   shouldForwardProp: (prop) => prop !== "open",
 })(({ theme, open }) => ({
   width: drawerWidth,
+  display: { xs: "none", md: "flex" },
   flexShrink: 0,
+  margin: 0,
+  padding: 0,
   whiteSpace: "nowrap",
   boxSizing: "border-box",
   ...(open && {
@@ -65,11 +71,9 @@ const Drawer = styled(MuiDrawer, {
 
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
-  alignItems: "center",
   justifyContent: "flex-end",
-  marginTop: "45%",
+  marginTop: "43%",
   marginBottom: "10%",
-
   padding: theme.spacing(0, 1),
   // necessary for content to be below app bar
   ...theme.mixins.toolbar,
@@ -99,10 +103,6 @@ const SideDrawer = () => {
     {
       text: "Kanban-Board",
       icon: <ViewKanbanIcon />,
-    },
-    {
-      text: "Roadmap",
-      icon: <MapIcon />,
     },
     {
       text: "Issues",
@@ -146,13 +146,15 @@ const SideDrawer = () => {
             const { text, icon } = item;
             return (
               <ListItem button key={text}>
-                <Button
-                  key={text}
-                  value={text}
-                  onClick={(e) => handleNavClick(e)}>
-                  {icon && <ListItemIcon>{icon}</ListItemIcon>}
-                  <ListItemText sx={{ color: "#404040" }} primary={text} />
-                </Button>
+                <div className="drawerList" style={{ margin: 0, padding: 0 }}>
+                  <Button
+                    key={text}
+                    value={text}
+                    onClick={(e) => handleNavClick(e)}>
+                    {icon && <ListItemIcon>{icon}</ListItemIcon>}
+                    <ListItemText sx={{ color: "#404040" }} primary={text} />
+                  </Button>
+                </div>
               </ListItem>
             );
           })}

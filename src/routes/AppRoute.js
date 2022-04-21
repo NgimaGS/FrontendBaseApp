@@ -10,9 +10,10 @@ const AppRoute = () => {
   return (
     <Router>
       <Switch>
+        <Route path="/" exact component={UserLogin} />
         <Route path="/register" exact component={UserRegistration} />
         <Route path="/login" exact component={UserLogin} />
-        <Route path="/" exact component={UserLogin} />
+
         <ProtectedRoute redirectTo={"/login"}>
           <AppLayout>
             <ProjectRoutes />
