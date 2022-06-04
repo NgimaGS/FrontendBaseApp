@@ -16,3 +16,8 @@ export const addProject = async (values) => {
   const { data } = await axiosInstance.post(`/project`, values);
   return data;
 };
+
+export const updateProject = async (values) => {
+  const { data } = await axiosInstance.put(`/project`, values);
+  return data;
+};

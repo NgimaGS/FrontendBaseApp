@@ -20,3 +20,8 @@ export const updateIssue = async (values) => {
   const { data } = await axiosInstance.put(`/issue`, values);
   return data;
 };
+
+export const deleteIssue = async (id) => {
+  const { data } = await axiosInstance.delete(`/issue/${id}`);
+  return data;
+};

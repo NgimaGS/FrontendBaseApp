@@ -4,6 +4,7 @@ import DatePicker from "@mui/lab/DatePicker";
 import { useGetMembersByProjectId } from "../../../api/member/useMember";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import {
+  useDeleteTask,
   useGetTaskByProjectId,
   useUpdateTask,
 } from "../../../api/task/useTask";
@@ -12,6 +13,7 @@ import moment from "moment";
 
 const useTaskTable = () => {
   const { data: member } = useGetMembersByProjectId();
+  const { mutate: mutateDelete } = useDeleteTask({});
   const { data } = useGetTaskByProjectId();
 
   const { mutate: mutateUpdate } = useUpdateTask({});
@@ -28,6 +30,10 @@ const useTaskTable = () => {
       type: values.type,
     };
     mutateUpdate(rowData);
+  };
+
+  const handleDelete = (id) => {
+    mutateDelete(id);
   };
 
   const columns = [
@@ -51,13 +57,14 @@ const useTaskTable = () => {
           label="Assigned To"
           fullWidth
           onChange={(e) => props.onChange(e.target.value)}>
-          {member.map((memdata) => {
-            return (
-              <MenuItem value={memdata?.User?.username}>
-                {memdata?.User?.name}
-              </MenuItem>
-            );
-          })}
+          {member &&
+            member.map((memdata) => {
+              return (
+                <MenuItem value={memdata?.User?.username}>
+                  {memdata?.User?.name}
+                </MenuItem>
+              );
+            })}
         </Select>
       ),
     },
@@ -80,7 +87,7 @@ const useTaskTable = () => {
       ),
     },
   ];
-  return { data, columns, handleUpdateTask };
+  return { data, columns, handleUpdateTask, handleDelete };
 };
 
 export default useTaskTable;

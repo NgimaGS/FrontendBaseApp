@@ -1,7 +1,6 @@
-import * as React from "react";
+import React, { useState } from "react";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
-import MapIcon from "@mui/icons-material/Map";
 import MediationIcon from "@mui/icons-material/Mediation";
 import SettingsIcon from "@mui/icons-material/Settings";
 import PriorityHighIcon from "@mui/icons-material/PriorityHigh";
@@ -9,6 +8,7 @@ import ViewKanbanIcon from "@mui/icons-material/ViewKanban";
 import { Paper } from "@mui/material";
 import { useHistory } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import { matchPath } from "react-router-dom";
 
 export default function LabelBottomNavigation() {
   const history = useHistory();
@@ -20,21 +20,38 @@ export default function LabelBottomNavigation() {
     history.push(`/project/${navPage}`);
   };
 
-  const [value, setValue] = React.useState("recents");
+  var letNav = false;
+
+  const [value, setValue] = useState("recents");
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
     handleNavClick(newValue);
   };
 
+  if (
+    [
+      "/project/members",
+      "/project/task",
+      "/project/kanban",
+      "/project/issues",
+      "/project/components",
+    ].indexOf(location.pathname) >= 0
+  ) {
+    letNav = true;
+  }
+
+  if (
+    matchPath(location.pathname, { path: "/project-:id" }) ||
+    matchPath(location.pathname, { path: "/project/components-:id" })
+  ) {
+    letNav = true;
+  }
+
   let itemList = [
     {
       text: "Kanban",
       icon: <ViewKanbanIcon />,
-    },
-    {
-      text: "Roadmap",
-      icon: <MapIcon />,
     },
     {
       text: "Issues",
@@ -82,7 +99,7 @@ export default function LabelBottomNavigation() {
             right: 0,
           }}
           elevation={3}>
-          {location.pathname !== "/projects" && (
+          {letNav && (
             <BottomNavigation
               style={{ backgroundColor: "#edeae5" }}
               value={value}

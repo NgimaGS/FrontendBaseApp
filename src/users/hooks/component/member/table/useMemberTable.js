@@ -1,8 +1,17 @@
-import { useGetMembersByProjectId } from "../../../api/member/useMember";
+import {
+  useDeleteMember,
+  useGetMembersByProjectId,
+} from "../../../api/member/useMember";
 import moment from "moment";
 
 const useMemberTable = () => {
   const { data } = useGetMembersByProjectId();
+
+  const { mutate: mutateDelete } = useDeleteMember({});
+
+  const handleDelete = (id) => {
+    mutateDelete(id);
+  };
 
   const columns = [
     { title: "id", field: "id" },
@@ -19,7 +28,7 @@ const useMemberTable = () => {
       render: (rowData) => moment(rowData?.createdAt).format("DD-MM-YYYY"),
     },
   ];
-  return { data, columns };
+  return { data, columns, handleDelete };
 };
 
 export default useMemberTable;

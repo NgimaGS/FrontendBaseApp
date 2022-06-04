@@ -5,6 +5,7 @@ import {
   addComponent,
   getComponentById,
   getProjectComponent,
+  updateComponent,
 } from "../../../api/component/component";
 
 export const useGetComponentByProjectId = () => {
@@ -32,6 +33,20 @@ export const useAddComponent = ({ onSuccess }) => {
     onSuccess: (data, variables, context) => {
       queryClient.invalidateQueries(["getComponent"]);
       toast.success("Succesfully added Component");
+      onSuccess && onSuccess(data, variables, context);
+    },
+    onError: (err, _variables, _context) => {
+      toast.error(`error: ${err.message}`);
+    },
+  });
+};
+
+export const useUpdateComponent = ({ onSuccess }) => {
+  const queryClient = useQueryClient();
+  return useMutation(["updateComponent"], (values) => updateComponent(values), {
+    onSuccess: (data, variables, context) => {
+      queryClient?.invalidateQueries(["ComponentById"]);
+      toast.success("Succesfully updated Component");
       onSuccess && onSuccess(data, variables, context);
     },
     onError: (err, _variables, _context) => {

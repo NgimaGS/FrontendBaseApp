@@ -14,16 +14,32 @@ import { useHistory, useLocation } from "react-router-dom";
 import Cookies from "js-cookie";
 import logo from "./../../assets/logo.png";
 import { useSelector } from "react-redux";
+import { matchPath } from "react-router-dom";
 
 const Navbar = () => {
-  let pages = ["Dashboard", "Task", "Members"];
+  let pages = ["Projects"];
   const { project } = useSelector((state) => state.project);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const location = useLocation();
   const history = useHistory();
 
-  if (location.pathname === "/projects") {
-    pages = ["Projects"];
+  if (
+    [
+      "/project/members",
+      "/project/task",
+      "/project/kanban",
+      "/project/issues",
+      "/project/components",
+    ].indexOf(location.pathname) >= 0
+  ) {
+    pages = ["Dashboard", "Task", "Members"];
+  }
+
+  if (
+    matchPath(location.pathname, { path: "/project-:id" }) ||
+    matchPath(location.pathname, { path: "/project/components-:id" })
+  ) {
+    pages = ["Dashboard", "Task", "Members"];
   }
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);

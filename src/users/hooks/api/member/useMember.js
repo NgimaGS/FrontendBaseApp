@@ -2,6 +2,7 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 import { toast } from "react-toastify";
 import {
   addMember,
+  deleteMember,
   getMemberById,
   getMembersByProjectId,
 } from "../../../api/member/member";
@@ -27,12 +28,25 @@ export const useGetMemberById = (id) => {
 };
 
 export const useAddMember = ({ onSuccess }) => {
-  const { project } = useSelector((state) => state.project);
   const queryClient = useQueryClient();
   return useMutation(["member"], (values) => addMember(values), {
     onSuccess: (data, variables, context) => {
-      queryClient.invalidateQueries(["getMember", project?.id]);
+      queryClient.invalidateQueries("getMember");
       toast.success("Succesfully added member");
+      onSuccess && onSuccess(data, variables, context);
+    },
+    onError: (err, _variables, _context) => {
+      toast.error(`error: ${err.message}`);
+    },
+  });
+};
+
+export const useDeleteMember = ({ onSuccess }) => {
+  const queryClient = useQueryClient();
+  return useMutation(["Delete Member"], (id) => deleteMember(id), {
+    onSuccess: (data, variables, context) => {
+      queryClient.invalidateQueries("getMember");
+      toast.success("Succesfully deleted Member");
       onSuccess && onSuccess(data, variables, context);
     },
     onError: (err, _variables, _context) => {

@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import {
   addTask,
+  deleteTask,
   getProjectTask,
   getTaskById,
   updateTask,
@@ -44,6 +45,20 @@ export const useUpdateTask = ({ onSuccess }) => {
       queryClient?.invalidateQueries(["getTask"]);
       queryClient?.invalidateQueries(["ComponentById"]);
       toast.success("Succesfully updated Task");
+      onSuccess && onSuccess(data, variables, context);
+    },
+    onError: (err, _variables, _context) => {
+      toast.error(`error: ${err.message}`);
+    },
+  });
+};
+
+export const useDeleteTask = ({ onSuccess }) => {
+  const queryClient = useQueryClient();
+  return useMutation(["task"], (id) => deleteTask(id), {
+    onSuccess: (data, variables, context) => {
+      queryClient.invalidateQueries(["getTask"]);
+      toast.success("Succesfully deleted Task");
       onSuccess && onSuccess(data, variables, context);
     },
     onError: (err, _variables, _context) => {

@@ -28,7 +28,7 @@ const AddTaskForm = ({ open, handleClose }) => {
           }}
           validationSchema={validationSchema}>
           <Form>
-            <DialogTitle>Add Member</DialogTitle>
+            <DialogTitle>Add Task</DialogTitle>
             <DialogContent>
               <ErrorMessage className="errorMsg" name="name" component="span" />
               <Box height={8} />

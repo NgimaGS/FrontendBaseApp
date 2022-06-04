@@ -49,6 +49,10 @@ const LoginForm = () => {
             <Button component={Link} to="/register">
               Sign Up
             </Button>
+            |{" "}
+            <Button component={Link} to="/forget-password">
+              Reset Password
+            </Button>
           </p>
         </Form>
       </Formik>

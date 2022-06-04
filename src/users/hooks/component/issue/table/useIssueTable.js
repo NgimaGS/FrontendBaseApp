@@ -1,5 +1,6 @@
 import { MenuItem, Select } from "@mui/material";
 import {
+  useDeleteIssue,
   useGetIssueByProjectId,
   useUpdateIssue,
 } from "../../../api/issue/useIssue";
@@ -9,6 +10,7 @@ const useIssueTable = () => {
   const { data } = useGetIssueByProjectId();
   const { data: member } = useGetMembersByProjectId();
   const { mutate: mutateUpdate } = useUpdateIssue({});
+  const { mutate: mutateDelete } = useDeleteIssue({});
 
   const handleUpdateIssue = (values) => {
     let rowData = {
@@ -21,6 +23,10 @@ const useIssueTable = () => {
     };
 
     mutateUpdate(rowData);
+  };
+
+  const handleDelete = (id) => {
+    mutateDelete(id);
   };
 
   const columns = [
@@ -44,18 +50,19 @@ const useIssueTable = () => {
           label="Assigned To"
           fullWidth
           onChange={(e) => props.onChange(e.target.value)}>
-          {member.map((memdata) => {
-            return (
-              <MenuItem value={memdata?.User?.username}>
-                {memdata?.User?.name}
-              </MenuItem>
-            );
-          })}
+          {member &&
+            member.map((memdata) => {
+              return (
+                <MenuItem value={memdata?.User?.username}>
+                  {memdata?.User?.name}
+                </MenuItem>
+              );
+            })}
         </Select>
       ),
     },
   ];
-  return { data, columns, handleUpdateIssue };
+  return { data, columns, handleUpdateIssue, handleDelete };
 };
 
 export default useIssueTable;

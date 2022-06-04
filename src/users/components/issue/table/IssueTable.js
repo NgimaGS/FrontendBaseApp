@@ -4,7 +4,7 @@ import { tableIcons } from "../../../../app/component/table/tableIcons";
 import useIssueTable from "../../../hooks/component/issue/table/useIssueTable";
 
 const IssueTable = () => {
-  const { data, columns, handleUpdateIssue } = useIssueTable();
+  const { data, columns, handleUpdateIssue, handleDelete } = useIssueTable();
   const tableRef = createRef();
   return (
     <div className="TableMaterial">
@@ -19,6 +19,14 @@ const IssueTable = () => {
             return new Promise((resolve, reject) => {
               handleUpdateIssue(newData);
               resolve();
+            });
+          },
+          onRowDelete: (oldData) => {
+            return new Promise((resolve, reject) => {
+              setTimeout(() => {
+                handleDelete(oldData?.id);
+                resolve();
+              }, 1000);
             });
           },
         }}

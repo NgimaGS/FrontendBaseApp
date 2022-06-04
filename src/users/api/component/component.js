@@ -14,3 +14,8 @@ export const addComponent = async (values) => {
   const { data } = await axiosInstance.post(`/component`, values);
   return data;
 };
+
+export const updateComponent = async (values) => {
+  const { data } = await axiosInstance.put(`/component`, values);
+  return data;
+};

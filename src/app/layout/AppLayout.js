@@ -6,6 +6,7 @@ import SideDrawer from "../component/drawer/SideDrawer";
 import BottomNavbar from "../component/navbar/BottomNavbar";
 import Navbar from "../component/navbar/Navbar";
 
+//style to make the application container responsive
 const useStyles = makeStyles({
   container: {
     display: "flex",

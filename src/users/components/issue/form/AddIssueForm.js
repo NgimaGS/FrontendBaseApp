@@ -62,16 +62,6 @@ const AddIssueForm = ({ open, handleClose }) => {
                 fullWidth
               />
               <Box height={8} />
-              <Field
-                name="assignedTo"
-                type="status"
-                as={TextField}
-                variant="outlined"
-                color="primary"
-                label="assignedTo"
-                fullWidth
-              />
-              <Box height={8} />
             </DialogContent>
             <DialogActions>
               <Button onClick={() => handleClose()}>Cancel</Button>

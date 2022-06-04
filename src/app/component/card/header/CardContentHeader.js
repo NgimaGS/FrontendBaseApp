@@ -1,9 +1,10 @@
 import { Divider, Fab, Typography } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import React from "react";
 
-const CardContentHeader = ({ title, type, onClick, children }) => {
+const CardContentHeader = ({ title, type, onClick, open, children }) => {
   return (
     <>
       <div className="Card-Header">
@@ -19,8 +20,10 @@ const CardContentHeader = ({ title, type, onClick, children }) => {
               <>
                 <AddIcon />
               </>
-            ) : type === "edit" ? (
+            ) : type === "edit" && !open ? (
               <EditIcon />
+            ) : open ? (
+              <ArrowBackIosIcon />
             ) : (
               <>{type}</>
             )}

@@ -17,6 +17,7 @@ import PriorityHighIcon from "@mui/icons-material/PriorityHigh";
 import ViewKanbanIcon from "@mui/icons-material/ViewKanban";
 import React, { useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
+import { matchPath } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -120,10 +121,25 @@ const SideDrawer = () => {
 
   const location = useLocation();
 
-  let varient = "permanent";
+  let varient = "temporary";
 
-  if (location.pathname === "/projects") {
-    varient = "temporary";
+  if (
+    [
+      "/project/members",
+      "/project/task",
+      "/project/kanban",
+      "/project/issues",
+      "/project/components",
+    ].indexOf(location.pathname) >= 0
+  ) {
+    varient = "permanent";
+  }
+
+  if (
+    matchPath(location.pathname, { path: "/project-:id" }) ||
+    matchPath(location.pathname, { path: "/project/components-:id" })
+  ) {
+    varient = "permanent";
   }
 
   return (

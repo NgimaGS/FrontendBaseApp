@@ -19,3 +19,8 @@ export const updateTask = async (values) => {
   const { data } = await axiosInstance.put(`/task`, values);
   return data;
 };
+
+export const deleteTask = async (id) => {
+  const { data } = await axiosInstance.delete(`/task/${id}`);
+  return data;
+};
